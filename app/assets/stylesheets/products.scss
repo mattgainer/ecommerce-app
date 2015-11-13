@@ -1,0 +1,37 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+img.image-index {
+  max-height: 55px;
+  max-width: inherit;
+}
+table {
+  table-layout: fixed;
+  border: 3px solid black;
+}
+td, th {
+  height: 75px;
+  width: inherit;
+  border: 1px solid black;
+  overflow:hidden;
+}
+th {
+  font-size: 150%;
+}
+caption {
+  font-size: 150%;
+}
+div.table-row {
+  overflow: auto;
+  max-width: inherit;
+  height: 60px;
+}
+.individual-product {
+  border-radius: 20px;
+  background-color: lightblue;
+  text-align: center;
+}
+.individual-image {
+  margin: auto;
+  max-height: 400px;
+}

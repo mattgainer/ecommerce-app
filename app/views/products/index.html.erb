@@ -1,0 +1,27 @@
+<div class = "container-fluid">
+  <div class = "row">
+    <% @products.each_with_index do |product, index| %>
+      <div class = "col-md-4">
+      <table class = "table">
+        <caption>Product <%= index + 1 %></caption>
+        <tr>
+          <th>Product Name</th>
+          <td><%= link_to product.name, "#{product.id}" %></td>
+        </tr>
+        <tr>
+          <th>Price</th>
+          <td>$<%= "#{product.price/100}.#{product.price%100}" %></td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td><div class = "table-row"><%= product.description %></div></td>
+        </tr>
+        <tr>
+          <th>Image</th>
+          <td><img class = "image-responsive image-index" src=<%= product.image %>></td>
+        </tr>
+      </table>
+      </div>
+    <% end %>
+  </div>
+</div>
