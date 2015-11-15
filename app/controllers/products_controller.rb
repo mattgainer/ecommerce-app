@@ -25,5 +25,7 @@ class ProductsController < ApplicationController
     redirect_to "/products"
     flash[:warning] = "Product Deleted"
   end
-
+  def search
+    @products = Product.where(name: params[:name])
+  end
 end

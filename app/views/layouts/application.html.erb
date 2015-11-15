@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EcommerceApp</title>
+  <title>The Fruit Cellar</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <header>
-    <h1>Ecommerce Application Mini-Capstone</h1>
+    <h1>The Fruit Cellar</h1>
     <% flash.each do |name, message| %>
       <div class = "container-fluid">
         <div class = "alert alert-<%= name %> alert-dismissible" role = "alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <%= message %>
         </div>
       </div>
     <% end %>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/products">Products</a></li>
+        <li><a href="/products/new">New</a></li>
+      </ul>
+      <%= form_tag '/products/search/', method: :get, class: "navbar-form navbar-right" do %>
+        <div class="form-group">
+        <%= text_field_tag :name, "Search", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= submit_tag "Search", class: "btn btn-default" %>
+      <% end %>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
   </header>
 <%= yield %>
   <footer class = "footer">

@@ -38,11 +38,24 @@ div.table-row {
 
 .footer {
   text-align: center;
-  
 }
 header {
   text-align: center;
 }
 .center-text {
   text-align: center;
+}
+.index-item {
+  background-color:lightblue;
+  border-radius: 10px;
+  text-align: center;
+  height: 400px;
+  border: 10px;
+}
+.img-rounded {
+  padding: 20px;
+  border-radius: 30px;
+}
+.index-table {
+  border:hidden;
 }
