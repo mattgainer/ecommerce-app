@@ -3,22 +3,22 @@
   <div class = "col-md-4">
     <%= form_tag "/products/#{@product.id}", method: :patch do %>
     <div class = "form-group">
-      <%= label_tag :name %>
-      <%= text_field_tag :name, @product.name %>
+      <p><%= label_tag :name %></p>
+      <p><%= text_field_tag :name, @product.name %></p>
     </div>
-    <div>
-      <%= label_tag :price %>
-      <%= text_field_tag :price, @product.price%>
+    <div class = "form-group">
+      <p><%= label_tag :price %></p>
+      <p><%= text_field_tag :price, @product.price%></p>
     </div>
-    <div>
-      <%= label_tag :description %>
-      <%= text_area_tag :description, @product.description %>
+    <div class = "form-group">
+      <p><%= label_tag :description %></p>
+      <p><%= text_area_tag :description, @product.description %></p>
     </div>
-    <div>
-      <%= label_tag :image %>
-      <%= text_field_tag :image, @product.image %>
+    <div class = "form-group">
+      <p><%= label_tag :image %></p>
+      <p><%= text_field_tag :image, @product.image %></p>
     </div>
-      <%= submit_tag "Submit Changes",  %>
+      <%= submit_tag "Submit Changes"  %>
     <% end %>
   </div>
 </div>

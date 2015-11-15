@@ -6,7 +6,7 @@
         <caption>Product <%= index + 1 %></caption>
         <tr>
           <th>Product Name</th>
-          <td><%= link_to product.name, "#{product.id}" %></td>
+          <td><%= link_to product.name, product_path(product.id) %></td>
         </tr>
         <tr>
           <th>Price</th>
@@ -20,8 +20,18 @@
           <th>Image</th>
           <td><img class = "image-responsive image-index" src=<%= product.image %>></td>
         </tr>
+        <tr>
+          <th>Edit Entry</th>
+          <td><%= link_to "Edit \"#{product.name}\"", edit_path(product.id) %></td>
+        </tr>
       </table>
       </div>
     <% end %>
+  </div>
+  <div class = "row">
+    <div class = "col-md-4"></div>
+    <div class = "col-md-4">
+      <p class = "center-text"><%= link_to "Add A New Product To The Database", products_new_path%></p>
+    </div>
   </div>
 </div>

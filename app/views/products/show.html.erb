@@ -2,15 +2,17 @@
   <div class = "col-md-3">
   </div>
   <div class = "col-md-6 individual-product">
-        <h3>Product Name</h3>
-        <p><%= @product.name %></p>
-        <h3>Product Price</h3>
-        <p>$<%= "#{@product.price/100}.#{@product.price%100}" %></p>
-        <h3>Product Description</h3>
-        <p><%= @product.description %></p>
-        <h3>Product Image</h3>
-        <p><img src="<%= @product.image %>" class = "img-responsive individual-image"></p>
-        <p><%= link_to "Permanently Delete \"#{@product.name}\" From The Database", "/products/#{@product.id}", method: :delete %>
+    <h3>Product Name</h3>
+    <p><%= @product.name %></p>
+    <h3>Product Price</h3>
+    <p>$<%= "#{@product.price/100}.#{@product.price%100}" %></p>
+    <h3>Product Description</h3>
+    <p><%= @product.description %></p>
+    <h3>Product Image</h3>
+    <p><img src="<%= @product.image %>" class = "img-responsive individual-image"></p>
+    <p><%= link_to "Permanently Delete \"#{@product.name}\" From The Database", product_path(@product.id), method: :delete %></p>
+    <p><%= link_to "Edit \"#{@product.name}\"", edit_path %></p>
+    <p><a href="/products/">Back to all products</a></p>
   </div>
 </div>
 
