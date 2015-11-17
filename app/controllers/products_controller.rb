@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id].to_i)
   end
   def update
-        Product.find_by(id: params[:id]).update(name: params[:name], price: params[:price].to_i, image: params[:image], description: params[:description])
+        Product.find_by(id: params[:id]).update(name: params[:name], price: params[:price], image: params[:image], description: params[:description])
         flash[:info] = "Product Updated"
         redirect_to "/products/#{Product.find_by(id: params[:id]).id}"
   end

@@ -4,15 +4,7 @@ class Product < ActiveRecord::Base
   end
 
   def price_dollar_form(value)
-    if value < 10;
-      "$0.0#{value}"
-    elsif value < 100
-      "$0.#{value}"
-    elsif value%100 < 10
-      "$#{value/100}.0#{value%100}"
-    else
-      "$#{value/100}.#{value%100}"
-    end
+    "$#{sprintf("%.2f", value)}"
   end
   def discount_message
     if price <= Product.discount
