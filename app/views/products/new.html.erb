@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
-      <h3>New Product Entry Form</h3>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3 class = "center-text">New Product Entry Form</h3>
       <%= form_tag '/products', method: :post do %>
         <div class="form-group">
           <%= label_tag :name, "Product Name" %>
@@ -19,11 +20,11 @@
           <%= label_tag :image, "Product Image" %>
           <%= text_field_tag :image, "URL Goes Here", class: "form-control" %>
         </div>
-        <div class="form-group">
+        <div class="form-group center-text">
           <%= submit_tag "Submit Product", class: "btn btn-default btn-lg" %>
         </div>
       <% end %>
-      <div class="form-group">
+      <div class="form-group center-text">
           <%= link_to "Abort Mission", "/products", class: "btn btn-default btn-lg" %>
       </div>
     </div>

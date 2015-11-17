@@ -4,17 +4,21 @@
       <div class = "col-md-3" >
         <a href="/products/<%= product.id %>">
           <div class = "index-item">
-            <table class = "index-table">
-              <tr class = "index-table">
-                <td class = "index-table"><img class = "img-responsive img-rounded" src=<%= product.image %>></td>  
-              </tr>
-              <tr class = "index-table">
-                <td class = "index-table"><button class = "btn btn-default btn-lg"><%= "#{product.name} - $#{product.price/100}.#{product.price%100}" %></button></td>
-              </tr>
-              </table>
+                <div>
+                  <img class = "img-responsive img-rounded" src=<%= product.image %>>
+                </div>  
+                <div>
+                  <button class = "btn btn-lg"><%= "#{product.name} - #{product.price_dollar_form(product.price)}" %></button>
+                </div>
           </div>  
         </a>
       </div>
     <% end %>
+  </div>
+  <div class = "row">
+    <div class = "col-md-4"></div>
+    <div class = "col-md-4">
+      <p class = "center-text"><%= link_to "Add A New Product To The Database", products_new_path%></p>
+    </div>
   </div>
 </div>
