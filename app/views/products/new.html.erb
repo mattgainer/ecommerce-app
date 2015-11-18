@@ -20,6 +20,10 @@
           <%= label_tag :image, "Product Image" %>
           <%= text_field_tag :image, "URL Goes Here", class: "form-control" %>
         </div>
+        <div class="form-group">
+          <%= label_tag :instock, "In Stock?" %>
+          <%= check_box :instock, :in_stock, {class: "checkbox"}, checked_value = "true", unchecked_value = "false" %>
+        </div>
         <div class="form-group center-text">
           <%= submit_tag "Submit Product", class: "btn btn-default btn-lg" %>
         </div>

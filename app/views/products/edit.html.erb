@@ -18,6 +18,9 @@
       <p><%= label_tag :image %></p>
       <p><%= text_field_tag :image, @product.image %></p>
     </div>
+    <div class = "form-group">
+      <p><%= label_tag :instock %>? <%= check_box :instock, :in_stock, {class: "checkbox"}, checked_value = "true", unchecked_value = "false" %></p>
+    </div>
       <%= submit_tag "Submit Changes"  %>
     <% end %>
   </div>

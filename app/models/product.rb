@@ -19,6 +19,12 @@ class Product < ActiveRecord::Base
   def total_price
     price + tax_calc
   end
-
+  def instock_message
+    if instock == true
+      "Currently In Stock"
+    else
+      "Not Currently In Stock"
+    end
+  end
 
 end

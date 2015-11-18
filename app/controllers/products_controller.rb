@@ -10,7 +10,12 @@ class ProductsController < ApplicationController
     @products = @products.order(:name)
   end
   def create
-    Product.create(name: params[:name], price: params[:price].to_i, image: params[:image], description: params[:description])
+    if params[:instock][:in_stock] == "true"
+      @in_stock = true
+    else
+      @in_stock = false
+    end
+    Product.create(name: params[:name], price: params[:price].to_i, image: params[:image], description: params[:description], instock: @in_stock)
     redirect_to "/products/#{Product.last.id}"
     flash[:success] = "Product Created"
   end
@@ -23,7 +28,12 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id].to_i)
   end
   def update
-        Product.find_by(id: params[:id]).update(name: params[:name], price: params[:price], image: params[:image], description: params[:description])
+    if params[:instock][:in_stock] == "true"
+      @in_stock = true
+    else
+      @in_stock = false
+    end
+        Product.find_by(id: params[:id]).update(name: params[:name], price: params[:price], image: params[:image], description: params[:description], instock: @in_stock)
         flash[:info] = "Product Updated"
         redirect_to "/products/#{Product.find_by(id: params[:id]).id}"
   end
