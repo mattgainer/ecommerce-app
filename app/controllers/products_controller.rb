@@ -1,13 +1,17 @@
 class ProductsController < ApplicationController
   def index
-    if params[:discount] == "true"
-      @products = Product.where("price < ?", Product.discount )
-    elsif params[:commit] == "Search"
-      @products = Product.where(name: params[:search])
+    if params[:order] == "PHtoL"
+      @products = Product.all.order(price: :desc)
+    elsif params[:order] == "PLtoH"
+      @products = Product.all.order(:price)
     else
-      @products = Product.all
+      @products = Product.all.order(:name)
     end
-    @products = @products.order(:name)
+    if params[:discount] == "true"
+      @products = @products.where("price < ?", Product.discount )
+    elsif params[:commit] == "Search"
+      @products = @products.where(name: params[:search])
+    end
   end
   def create
     if params[:instock][:in_stock] == "true"
@@ -15,7 +19,7 @@ class ProductsController < ApplicationController
     else
       @in_stock = false
     end
-    Product.create(name: params[:name], price: params[:price].to_i, image: params[:image], description: params[:description], instock: @in_stock)
+    Product.create(name: params[:name], price: params[:price], image: params[:image], description: params[:description], instock: @in_stock)
     redirect_to "/products/#{Product.last.id}"
     flash[:success] = "Product Created"
   end

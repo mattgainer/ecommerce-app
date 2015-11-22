@@ -1,6 +1,13 @@
 class Product < ActiveRecord::Base
   def self.discount
-    100
+    1.00
+  end
+  def self.random_id
+    product_id = []
+    Product.all.each do |product|
+      product_id << product.id
+    end
+    product_id[rand(0..product_id.length - 1)]
   end
 
   def price_dollar_form(value)
