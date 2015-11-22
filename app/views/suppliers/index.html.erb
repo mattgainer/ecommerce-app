@@ -1,0 +1,21 @@
+<div class = "container-fluid">
+  <div class = "row">
+    <% @suppliers.each_with_index do |supplier, index| %>
+      <div class = "col-md-3" >
+        <a href="/suppliers/<%= supplier.id %>">
+          <div class = "index-item">
+            <h3><br><%= "#{supplier.name}" %></h3>
+            <p><%= link_to "#{supplier.email}", "mailto:#{supplier.email}" %></p>
+            <p><%= "#{supplier.phone}" %></p>
+          </div>  
+        </a>
+      </div>
+    <% end %>
+  </div>
+  <div class = "row">
+    <div class = "col-md-4"></div>
+    <div class = "col-md-4">
+      <p class = "center-text"><%= link_to "Add A New Supplier To The Database", suppliers_new_path%></p>
+    </div>
+  </div>
+</div>

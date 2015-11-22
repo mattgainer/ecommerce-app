@@ -1,0 +1,15 @@
+<div class = "container-fluid">
+  <div class = "col-md-3">
+  </div>
+  <div class = "col-md-6 individual-product">
+    <h3>Supplier Name</h3>
+    <p><%= @supplier.name %></p>
+    <h3>Supplier Email</h3>
+    <p><%= link_to "#{@supplier.email}","mailto:#{@supplier.email}" %></p>
+    <h3>Supplier Phone</h3>
+    <p><%= @supplier.phone %></p>
+    <p><%= link_to "Permanently Delete \"#{@supplier.name}\" From The Database", supplier_path(@supplier.id), method: :delete, class: "btn btn-default btn-lg" %></p>
+    <p><%= link_to "Edit \"#{@supplier.name}\"", edit_supplier_path, method: :get, class: "btn btn-default btn-lg" %></p>
+    <p><a href="/suppliers"><button class = "btn btn-default btn-lg">Back to all suppliers</button></a></p>
+  </div>
+</div>

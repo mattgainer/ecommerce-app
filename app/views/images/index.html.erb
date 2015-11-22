@@ -1,0 +1,21 @@
+<div class = "container-fluid">
+  <div class = "row">
+    <% @images.each_with_index do |image, index| %>
+      <div class = "col-md-3" >
+        <a href="/images/<%= image.id %>">
+          <div class = "index-item">
+                <div>
+                  <img class = "img-responsive img-rounded" src=<%= image.url %>>
+                </div>
+          </div>  
+        </a>
+      </div>
+    <% end %>
+  </div>
+  <div class = "row">
+    <div class = "col-md-4"></div>
+    <div class = "col-md-4">
+      <p class = "center-text"><%= link_to "Add A New Image To The Database", images_new_path%></p>
+    </div>
+  </div>
+</div>

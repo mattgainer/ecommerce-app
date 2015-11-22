@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3 class = "center-text">New Supplier Entry Form</h3>
+      <%= form_tag '/suppliers', method: :post do %>
+        <div class="form-group">
+          <%= label_tag :name, "Supplier Name" %>
+          <%= text_field_tag :name, "Supplier", class: "form-control" %>
+        </div>      
+        <div class="form-group">
+          <%= label_tag :email, "Supplier Email" %>
+          <%= text_field_tag :email, "example@example.org", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :phone, "Supplier Phone Number" %>
+          <%= text_field_tag :phone, "(XXX) XXX-XXXX", class: "form-control" %>
+        </div>
+        <div class="form-group center-text">
+          <%= submit_tag "Submit Supplier", class: "btn btn-default btn-lg" %>
+        </div>
+      <% end %>
+      <div class="form-group center-text">
+          <%= link_to "Abort Mission", "/suppliers", class: "btn btn-default btn-lg" %>
+      </div>
+    </div>
+  </div>
+</div>

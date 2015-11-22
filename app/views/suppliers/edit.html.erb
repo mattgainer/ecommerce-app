@@ -1,0 +1,20 @@
+<div class = "container-fluid">
+  <div class = "col-md-4"></div>
+  <div class = "col-md-4">
+    <%= form_tag "/suppliers/#{@supplier.id}", method: :patch do %>
+      <div class = "form-group">
+        <p><%= label_tag :name %></p>
+        <p><%= text_field_tag :name, @supplier.name %></p>
+      </div>
+      <div class = "form-group">
+        <p><%= label_tag :email %></p>
+        <p><%= text_field_tag :email, @supplier.email%></p>
+      </div>
+      <div class = "form-group">
+        <p><%= label_tag :phone %></p>
+        <p><%= text_area_tag :phone, @supplier.phone %></p>
+      </div>
+      <%= submit_tag "Submit Changes" %>
+    <% end %>
+  </div>
+</div>

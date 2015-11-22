@@ -19,7 +19,8 @@ class ProductsController < ApplicationController
     else
       @in_stock = false
     end
-    Product.create(name: params[:name], price: params[:price], image: params[:image], description: params[:description], instock: @in_stock)
+    Product.create(name: params[:name], price: params[:price], description: params[:description], instock: @in_stock)
+      Image.create(url: params[:image], product_id: Product.last.id)
     redirect_to "/products/#{Product.last.id}"
     flash[:success] = "Product Created"
   end
@@ -37,9 +38,9 @@ class ProductsController < ApplicationController
     else
       @in_stock = false
     end
-        Product.find_by(id: params[:id]).update(name: params[:name], price: params[:price], image: params[:image], description: params[:description], instock: @in_stock)
-        flash[:info] = "Product Updated"
-        redirect_to "/products/#{Product.find_by(id: params[:id]).id}"
+    Product.find_by(id: params[:id]).update(name: params[:name], price: params[:price], description: params[:description], instock: @in_stock)
+    flash[:info] = "Product Updated"
+    redirect_to "/products/#{Product.find_by(id: params[:id]).id}"
   end
   def destroy
     Product.find_by(id: params[:id]).destroy

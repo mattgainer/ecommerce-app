@@ -2,26 +2,28 @@
   <div class = "col-md-4"></div>
   <div class = "col-md-4">
     <%= form_tag "/products/#{@product.id}", method: :patch do %>
-    <div class = "form-group">
-      <p><%= label_tag :name %></p>
-      <p><%= text_field_tag :name, @product.name %></p>
-    </div>
-    <div class = "form-group">
-      <p><%= label_tag :price %></p>
-      <p><%= text_field_tag :price, @product.price%></p>
-    </div>
-    <div class = "form-group">
-      <p><%= label_tag :description %></p>
-      <p><%= text_area_tag :description, @product.description %></p>
-    </div>
-    <div class = "form-group">
-      <p><%= label_tag :image %></p>
-      <p><%= text_field_tag :image, @product.image %></p>
-    </div>
-    <div class = "form-group">
-      <p><%= label_tag :instock %>? <%= check_box :instock, :in_stock, {class: "checkbox"}, checked_value = "true", unchecked_value = "false" %></p>
-    </div>
-      <%= submit_tag "Submit Changes"  %>
+      <div class = "form-group">
+        <p><%= label_tag :name %></p>
+        <p><%= text_field_tag :name, @product.name %></p>
+      </div>
+      <div class = "form-group">
+        <p><%= label_tag :price %></p>
+        <p><%= text_field_tag :price, @product.price%></p>
+      </div>
+      <div class = "form-group">
+        <p><%= label_tag :description %></p>
+        <p><%= text_area_tag :description, @product.description %></p>
+      </div>
+      <% @product.images.each_with_index do |image, index| %>
+        <div class = "form-group">
+          <p><%= label_tag :image %></p>
+          <p><%= link_to "#{image.url}", "/images/#{image.id}/edit" %></p>
+        </div>
+      <% end %>
+      <div class = "form-group">
+        <p><%= label_tag :instock %>? <%= check_box :instock, :in_stock, {class: "checkbox"}, checked_value = "true", unchecked_value = "false" %></p>
+      </div>
+      <%= submit_tag "Submit Changes" %>
     <% end %>
   </div>
 </div>

@@ -1,0 +1,12 @@
+<div class = "container-fluid">
+  <div class = "col-md-3">
+  </div>
+  <div class = "col-md-6 individual-product">
+    <h3>Image</h3>
+    <p><img class="img-responsive" src=<%= @image.url %>></p>
+    <h3>Product</h3>
+    <p><%= @image.product.name %></p>
+    <p><%= link_to "Edit Image", edit_image_path, method: :get, class: "btn btn-default btn-lg" %></p>
+    <p><a href="/images"><button class = "btn btn-default btn-lg">Back to All Images</button></a></p>
+  </div>
+</div>

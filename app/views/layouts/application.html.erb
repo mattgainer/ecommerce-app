@@ -37,6 +37,8 @@
         <li><%= link_to "Discounts (#{Product.last.price_dollar_form(Product.discount)})", "/products?discount=true" %></li>
         <li><%= link_to "New", "/products/new" %></li>
         <li><%= link_to "Random Product", "/products/#{Product.random_id}" %></li>
+        <li><%= link_to "Suppliers", "/suppliers" %></li>
+        <li><%= link_to "Images", "/images" %></li>
 
       </ul>
       <%= form_tag '/products', method: :get, class: "navbar-form navbar-right" do %>

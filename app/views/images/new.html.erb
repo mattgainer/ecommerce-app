@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3 class = "center-text">New Image Entry Form</h3>
+      <%= form_tag '/images', method: :post do %>
+        <div class="form-group">
+          <%= label_tag :name, "Product Name" %>
+          <%= text_field_tag :name, @fruit_name, class: "form-control" %>
+        </div>      
+        <div class="form-group">
+          <%= label_tag :url, "Image URL" %>
+          <%= text_field_tag :url,"", class: "form-control" %>
+        </div>
+        <div class="form-group center-text">
+          <%= submit_tag "Submit Image", class: "btn btn-default btn-lg" %>
+        </div>
+      <% end %>
+      <div class="form-group center-text">
+          <%= link_to "Abort Mission", "/images", class: "btn btn-default btn-lg" %>
+      </div>
+    </div>
+  </div>
+</div>

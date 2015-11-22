@@ -5,7 +5,7 @@
         <a href="/products/<%= product.id %>">
           <div class = "index-item">
                 <div>
-                  <img class = "img-responsive img-rounded" src=<%= product.image %>>
+                  <img class = "img-responsive img-rounded" src=<%= product.images.first.url %>>
                 </div>  
                 <div>
                   <button class = "btn btn-lg"><%= "#{product.name} - #{product.price_dollar_form(product.price)}" %></button>
@@ -14,11 +14,5 @@
         </a>
       </div>
     <% end %>
-  </div>
-  <div class = "row">
-    <div class = "col-md-4"></div>
-    <div class = "col-md-4">
-      <p class = "center-text"><%= link_to "Add A New Product To The Database", products_new_path%></p>
-    </div>
   </div>
 </div>

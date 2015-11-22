@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+  belongs_to :supplier
+  has_many :images
   def self.discount
     1.00
   end
@@ -33,5 +35,4 @@ class Product < ActiveRecord::Base
       "Not Currently In Stock"
     end
   end
-
 end
