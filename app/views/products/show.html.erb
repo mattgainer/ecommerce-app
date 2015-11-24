@@ -1,26 +1,53 @@
-<div class = "container-fluid">
-  <div class = "col-md-3">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 individual-product">
+      <h3>Product Name</h3>
+      <p><%= @product.name %></p>
+      <h4 class="discount-message"><%= @product.discount_message %></h4>
+      <h3>Product Prices</h3>
+      <p>Store Price: <%= @product.price_dollar_form(@product.price) %><br>Tax: <%= @product.price_dollar_form(@product.tax_calc) %><br>Price With Tax: <%= @product.price_dollar_form(@product.total_price) %></p>
+      <h3>Product Description</h3>
+      <p><%= @product.description %></p>
+      <h3>Product Supplier</h3>
+      <p><%= @product.supplier.name %></p>
+      <h3>Product Added By</h3>
+      <p><%= @product.user.email %></p>
+      <h3>Product Images</h3>
+      <% @product.images.each do |image| %>
+      <p><img src="<%= image.url %>" class = "img-responsive individual-image"></p>
+      <% end %>
+      <h3>This Product is <%= @product.instock_message %></h3>
+      <% if current_user.admin? %>
+      <p><%= link_to "Edit \"#{@product.name}\"", edit_product_path, method: :get, class: "btn btn-default btn-lg" %></p>
+      <p><%= link_to "Edit Images", "/images?product=#{@product.id}", method: :get, class: "btn btn-default btn-lg" %></p>
+      <p><%= link_to "New Image", "/images/new?product=#{@product.id}", method: :get, class: "btn btn-default btn-lg" %></p>
+      <p><%= link_to "Permanently Delete \"#{@product.name}\" From The Database", product_path(@product.id), method: :delete, class: "btn btn-default btn-lg" %></p>
+      <% end %>
+      <p><a href="/products/"><button class = "btn btn-default btn-lg">Back to all products</button></a></p>
+    </div>
   </div>
-  <div class = "col-md-6 individual-product">
-    <h3>Product Name</h3>
-    <p><%= @product.name %></p>
-    <h4 class = "discount-message"><%= @product.discount_message %></h4>
-    <h3>Product Prices</h3>
-    <p>Store Price: <%= @product.price_dollar_form(@product.price) %><br>Tax: <%= @product.price_dollar_form(@product.tax_calc) %><br>Price With Tax: <%= @product.price_dollar_form(@product.total_price) %></p>
-    <h3>Product Description</h3>
-    <p><%= @product.description %></p>
-    <h3>Product Supplier</h3>
-    <p><%= @product.supplier.name %></p>
-    <h3>Product Images</h3>
-    <% @product.images.each do |image| %>
-    <p><img src="<%= image.url %>" class = "img-responsive individual-image"></p>
-    <% end %>
-    <h3>This Product is <%= @product.instock_message %></h3>
-    <p><%= link_to "Edit \"#{@product.name}\"", edit_product_path, method: :get, class: "btn btn-default btn-lg" %></p>
-    <p><%= link_to "Edit Images", "/images?product=#{@product.id}", method: :get, class: "btn btn-default btn-lg" %></p>
-    <p><%= link_to "New Image", "/images/new?product=#{@product.id}", method: :get, class: "btn btn-default btn-lg" %></p>
-    <p><a href="/products/"><button class = "btn btn-default btn-lg">Back to all products</button></a></p>
-    <p><%= link_to "Permanently Delete \"#{@product.name}\" From The Database", product_path(@product.id), method: :delete, class: "btn btn-default btn-lg" %></p>
+  <% if !current_user.admin? %>
+  <br>
+  <div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-2 individual-product">
+      <h3>Checkout</h3>
+      <%= form_tag "/orders", method: :post do %>
+        <div class="form-group">
+          <p><%= label_tag :quantity %></p>
+          <p><%= number_field_tag :quantity, 1, class: "form-control" %></p>
+        </div>
+        <div class="form-group">
+          <p><%= hidden_field_tag :product_id, @product.id %></p>
+        </div>
+        <div class="form-group">
+          <%= submit_tag "Buy Now", class: "btn btn-lg btn-default" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+  <% end %>
 </div>
 

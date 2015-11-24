@@ -45,6 +45,20 @@ Rails.application.routes.draw do
 
   delete 'images/:id', to: 'images#destroy'
 
+  get '/orders', to: 'orders#index'
+
+  get '/orders/new', to: 'orders#new'
+
+  post '/orders', to: 'orders#create'
+
+  get '/orders/:id', to: 'orders#show', as: 'order'
+
+  get '/orders/:id/edit', to: 'orders#edit', as: 'edit_order'
+
+  patch '/orders/:id', to: 'orders#update'
+
+  delete 'orders/:id', to: 'orders#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

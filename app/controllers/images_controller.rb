@@ -14,12 +14,12 @@ class ImagesController < ApplicationController
     end
   end
   def create
-    product = Product.find_by(name: params[:product])
+    product = Product.find_by(name: params[:name])
     if product == nil
       flash[:warning] = "No Product by That Name"
       redirect_to "/images/new"
     else
-      Image.create(url: params[:url], product_id: product_id)
+      Image.create(url: params[:url], product_id: product.id)
       redirect_to "/images/#{Image.last.id}"
       flash[:success] = "Image Created"
     end

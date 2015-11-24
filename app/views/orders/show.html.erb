@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 individual-product">
+      <h3>Order Number</h3>
+      <p><%= @order.id %></p>
+      <h3>Product Ordered</h3>
+      <h4><%= @order.product.name %></h4>
+      <p><img class="img-responsive individual-image img-rounded" src="<%= @order.product.images.first.url %>"></p>
+      <h3>Ordered By</h3>
+      <p><%= @order.user.email %></p>
+      <h3>Subtotal</h3>
+      <p><%= @order.price_dollar_form(@order.subtotal) %></p>
+      <h3>Tax</h3>
+      <p><%= @order.price_dollar_form(@order.tax) %></p>
+      <h3>Total Including Tax</h3>
+      <p><%= @order.price_dollar_form(@order.total) %></p>
+      <h3>Order Created</h3>
+      <p><%= @order.nice_time_form(@order.created_at) %></p>
+    </div>
+  </div>
+</div>

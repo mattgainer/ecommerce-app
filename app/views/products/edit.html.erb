@@ -16,7 +16,7 @@
       </div>
       <% @product.images.each_with_index do |image, index| %>
         <div class = "form-group">
-          <p><%= label_tag :image %></p>
+          <p><%= label_tag "Image #{index + 1}" %></p>
           <p><%= link_to "#{image.url}", "/images/#{image.id}/edit" %></p>
         </div>
       <% end %>
