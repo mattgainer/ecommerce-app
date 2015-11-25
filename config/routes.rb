@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { sessions: "users/sessions" }
+  devise_for :users, controllers: { sessions: "users/sessions", unlocks: "users/unlocks", registrations: "users/registrations", passwords: "users/passwords", confirmations: "users/confirmations" }
   root to: 'products#index'
   
   get '/products', to: 'products#index'

@@ -8,7 +8,7 @@
       <h4><%= @order.product.name %></h4>
       <p><img class="img-responsive individual-image img-rounded" src="<%= @order.product.images.first.url %>"></p>
       <h3>Ordered By</h3>
-      <p><%= @order.user.email %></p>
+      <p><%= @order.user.full_name %></p>
       <h3>Subtotal</h3>
       <p><%= @order.price_dollar_form(@order.subtotal) %></p>
       <h3>Tax</h3>
@@ -20,3 +20,4 @@
     </div>
   </div>
 </div>
+

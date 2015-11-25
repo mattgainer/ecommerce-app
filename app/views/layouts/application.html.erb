@@ -32,6 +32,7 @@
           <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <li><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
+            <li><%= link_to "#{current_user.full_name}", "/users/edit", method: :get %></li>
           <% else %>
             <li><%= link_to "Sign In", "/users/sign_in", method: :get %></li>
             <li><%= link_to "Sign Up", "/users/sign_up" %></li>
