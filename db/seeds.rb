@@ -1,8 +1,4 @@
-User.create!([
-  {email: "matgainer@gmail.com", encrypted_password: "$2a$10$njFSbYojtZFA9KtkRXcgBu5VK/3xm1Gu5umXU17SCFwYcHm6L13KS", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 5, current_sign_in_at: "2015-11-24 21:29:08", last_sign_in_at: "2015-11-24 19:43:05", current_sign_in_ip: "::1", last_sign_in_ip: "::1", role_id: 1, first_name: nil, last_name: nil},
-  {email: "new@example.com", encrypted_password: "$2a$10$q5zNETA0Hf2guXFpW2cAw.QBvQa1IfXzNSbuajAcVziRCT0FH8OTq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2015-11-24 05:09:34", last_sign_in_at: "2015-11-24 04:54:21", current_sign_in_ip: "::1", last_sign_in_ip: "::1", role_id: 2, first_name: nil, last_name: nil},
-  {email: "xxx@xxx.xxx", encrypted_password: "$2a$10$u7FDOo7BSjhrv.PBIVb4aeHULAatsd7E.3uXDUUs3RTxZdEwsfqCe", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2015-11-24 21:31:25", last_sign_in_at: "2015-11-24 20:03:03", current_sign_in_ip: "::1", last_sign_in_ip: "::1", role_id: 2, first_name: "xxx", last_name: "xxx"}
-])
+User.create!([])
 Image.create!([
   {url: "http://www.jaydelovell.com/wp-content/uploads/2015/01/ask-me-about-my-banana.jpg", product_id: 1},
   {url: "http://www.jacksonadvocateonline.com/wp-content/uploads/2011/08/peach_1.jpg", product_id: 2},
