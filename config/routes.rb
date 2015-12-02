@@ -59,6 +59,19 @@ Rails.application.routes.draw do
 
   delete 'orders/:id', to: 'orders#destroy'
 
+  get '/carted_products', to: 'carted_products#index'
+
+  get '/carted_products/new', to: 'carted_products#new'
+
+  post '/carted_products', to: 'carted_products#create'
+
+  get '/carted_products/:id', to: 'carted_products#show', as: 'carted_product'
+
+  get '/carted_products/:id/edit', to: 'carted_products#edit', as: 'edit_carted_product'
+
+  patch '/carted_products/:id', to: 'carted_products#update'
+
+  delete 'carted_products/:id', to: 'carted_products#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

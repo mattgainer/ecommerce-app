@@ -1,23 +1,61 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 individual-product">
-      <h3>Order Number</h3>
-      <p><%= @order.id %></p>
-      <h3>Product Ordered</h3>
-      <h4><%= @order.product.name %></h4>
-      <p><img class="img-responsive individual-image img-rounded" src="<%= @order.product.images.first.url %>"></p>
-      <h3>Ordered By</h3>
-      <p><%= @order.user.full_name %></p>
-      <h3>Subtotal</h3>
-      <p><%= @order.price_dollar_form(@order.subtotal) %></p>
-      <h3>Tax</h3>
-      <p><%= @order.price_dollar_form(@order.tax) %></p>
-      <h3>Total Including Tax</h3>
-      <p><%= @order.price_dollar_form(@order.total) %></p>
-      <h3>Order Created</h3>
-      <p><%= @order.nice_time_form(@order.created_at) %></p>
+<% if @order.user_id == current_user.id || current_user.admin? %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 individual-product">
+        <h3>Order Number</h3>
+        <p><%= @order.id %></p>
+        <h3>Ordered Products</h3>
+        <table class="table table-order">
+          <tr>
+            <th class="table-order"></th>
+            <th class="table-order">Product</th>
+            <th class="table-order">Quantity</th>
+            <th class="table-order">Subtotal</th>
+            <th class="table-order">Tax Owed</th>
+            <th class="table-order">Total</th>
+          </tr>
+          <% @order.carted_products.where(removed: false).each_with_index do |carted_product, index| %>
+          <tr>
+            <% if @order.open %>
+              <td class="table-order">
+                <%= link_to "Remove", "/carted_products/#{carted_product.id}?removefrom=#{@order.id}", class: "btn btn-default" %>
+              </td>
+              <% else %>
+                <th class="table-order">
+                  <%= index + 1 %>
+                </th>
+              <% end %>
+            <td class="table-order"><%= carted_product.product.name %></td>
+            <td class="table-order"><%= carted_product.quantity %></td>
+            <td class="table-order"><%= carted_product.dollar(carted_product.price) if @order.open %></td>
+            <td class="table-order"><%= carted_product.dollar(carted_product.tax_calc) if @order.open %></td>
+            <td class="table-order"><%= carted_product.dollar(carted_product.total_price) if @order.open %></td>
+          </tr>
+          <% end %>
+          <tr>
+            <th class="table-order">Totals</th>
+            <th class="table-order">------</th>
+            <th class="table-order"><%= @order.carted_products.where(removed: false).sum(:quantity) %></th>
+            <% if @order.open %>
+              <th class="table-order"><%= @order.price_dollar_form(@order.running_subtotal) %></th>
+              <th class="table-order"><%= @order.price_dollar_form(@order.running_tax) %></th>
+              <th class="table-order"><%= @order.price_dollar_form(@order.running_total) %></th>
+            <% else %>
+              <th class="table-order"><%= @order.price_dollar_form(@order.subtotal) %></th>
+              <th class="table-order"><%= @order.price_dollar_form(@order.tax) %></th>
+              <th class="table-order"><%= @order.price_dollar_form(@order.total) %>
+            <% end %>
+          </tr>
+        </table>
+        <h3>Ordered By</h3>
+        <p><%= @order.user.full_name %></p>
+        <h3>Order Created</h3>
+        <p><%= @order.nice_time_form(@order.created_at) %></p>
+        <% if @order.open %>
+        <p><%= link_to "Complete Order", "/orders/#{@order.id}?complete=true", class: "btn btn-default btn-lg" %></p> 
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
-
+<% end %>

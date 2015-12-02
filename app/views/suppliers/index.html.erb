@@ -1,6 +1,6 @@
 <div class = "container-fluid">
   <div class = "row">
-    <% @suppliers.each_with_index do |supplier, index| %>
+    <% @suppliers.each do |supplier| %>
       <div class = "col-md-3" >
         <a href="/suppliers/<%= supplier.id %>">
           <div class = "index-item">

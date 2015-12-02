@@ -24,10 +24,17 @@
                 <li><%= link_to "Discounts (#{Product.last.price_dollar_form(Product.discount)})", "/products?discount=true" %></li>
                 <li><%= link_to "New", "/products/new" %></li>
                 <li><%= link_to "Random Product", "/products/#{Product.random_id}" %></li>
+                <li role="separator" class="divider"></li>
+                <% Category.all.each do |category| %>
+                  <li><%= link_to category.name, "/products/?category=#{category.id}" %></li>
+                <% end %>
               </ul>
             </li>
-            <li><%= link_to "Suppliers", "/suppliers" %></li>
-            <li><%= link_to "Images", "/images" %></li>
+            <% if current_user.admin? %>
+              <li><%= link_to "Suppliers", "/suppliers" %></li>
+              <li><%= link_to "Images", "/images" %></li>
+            <% end %>
+            <li><%= link_to "My Order History", "/orders" %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
@@ -37,7 +44,7 @@
             <li><%= link_to "Sign In", "/users/sign_in", method: :get %></li>
             <li><%= link_to "Sign Up", "/users/sign_up" %></li>
           <% end %>
-            <li><%= link_to "Cart", "#" %></li>
+            <li><%= link_to "Cart", "/orders/#{Order.find_by(user_id: current_user.id, open: true).id}" %></li>
           </ul>
           <%= form_tag '/products', method: :get, class: "navbar-form navbar-right" do %>
             <div class="form-group">

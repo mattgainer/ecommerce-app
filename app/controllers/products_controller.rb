@@ -1,9 +1,14 @@
 class ProductsController < ApplicationController
   def index
+    if !current_user.orders.find_by(open: true)
+      redirect_to "/orders"
+    end
     if params[:order] == "PHtoL"
       @products = Product.all.order(price: :desc)
     elsif params[:order] == "PLtoH"
       @products = Product.all.order(:price)
+    elsif params[:category]
+      @products = Category.find_by(id: params[:category].to_i).products
     else
       @products = Product.all.order(:name)
     end
@@ -19,20 +24,20 @@ class ProductsController < ApplicationController
     else
       @in_stock = false
     end
-    supplier = Supplier.find_by(name: params[:supplier_name])
-    if supplier != nil
-      Product.create(name: params[:name], price: params[:price], description: params[:description], instock: @in_stock, user_id: current_user.id, supplier_id: supplier.id)
+    supplier = Supplier.find_by(name: params[:supplier_name]) || Supplier.new
+      @product = Product.new(name: params[:name], price: params[:price], description: params[:description], instock: @in_stock, user_id: current_user.id, supplier_id: supplier.id)
+    if @product.save
       redirect_to "/products/#{Product.last.id}"
       flash[:success] = "Product Created"
     else
-      redirect_to "/products/new"
-      flash[:warning] = "No Supplier By That Name"
+      render :new
     end
   end
   def new
     unless current_user.admin?
       redirect_to root_path
     end
+    @product = Product.new
   end
   def show
     @product = Product.find_by(id: params[:id].to_i)
