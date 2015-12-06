@@ -5,7 +5,7 @@
         <a href="/orders/<%= order.id %>">
           <div class = "index-item">
             <h3><br> Order #<%= "#{order.id}" %></h3>
-            <% order.carted_products.each_with_index do |cart, index| %>
+            <% order.carted_products.where(removed: false).each_with_index do |cart, index| %>
               <% if index <= 5 %>
                 <p><%= "#{index + 1}. #{Product.find_by(id: cart.product_id).name}, Quantity: #{cart.quantity}" %></p>
               <% end %>

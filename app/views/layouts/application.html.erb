@@ -30,9 +30,11 @@
                 <% end %>
               </ul>
             </li>
-            <% if current_user.admin? %>
-              <li><%= link_to "Suppliers", "/suppliers" %></li>
-              <li><%= link_to "Images", "/images" %></li>
+            <% if current_user %>
+              <% if current_user.admin? %>
+                <li><%= link_to "Suppliers", "/suppliers" %></li>
+                <li><%= link_to "Images", "/images" %></li>
+              <% end %>
             <% end %>
             <li><%= link_to "My Order History", "/orders" %></li>
           </ul>
@@ -40,11 +42,13 @@
           <% if current_user %>
             <li><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
             <li><%= link_to "#{current_user.full_name}", "/users/edit", method: :get %></li>
+            <% if current_user.buyer? %>
+              <li><%= link_to "Cart (#{@cart_count})", "/orders/#{Order.find_by(user_id: current_user.id, open: true).id}" %></li>
+            <% end %>
           <% else %>
             <li><%= link_to "Sign In", "/users/sign_in", method: :get %></li>
             <li><%= link_to "Sign Up", "/users/sign_up" %></li>
           <% end %>
-            <li><%= link_to "Cart", "/orders/#{Order.find_by(user_id: current_user.id, open: true).id}" %></li>
           </ul>
           <%= form_tag '/products', method: :get, class: "navbar-form navbar-right" do %>
             <div class="form-group">

@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
       @order = Order.find_by(id: params[:id])
       if @order.price_dollar_form(@order.running_total) != "$0.00"
         redirect_to "/orders?show=#{params[:id]}"
+        session[:cart_count] = 0
         @order.update(open: false, subtotal: @order.running_subtotal, tax: @order.running_tax, total: @order.running_total)
       else
         flash[:warning] = "No Items Yet In Cart"

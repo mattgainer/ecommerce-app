@@ -12,7 +12,7 @@
         <h3>Product Description</h3>
         <p><%= @product.description %></p>
         <h3>Product Supplier</h3>
-        <p><%= @product.supplier.name %></p>
+        <p><%= @product.supplier.company_name %></p>
         <h3>Product Added By</h3>
         <p><%= @product.user.email %></p>
         <h3>Product Images</h3>
@@ -36,7 +36,7 @@
       <div class="col-md-4 individual-product cart-div">
         <h3>Add <%= "\'#{@product.name}\'" %> To Cart</h3>
           <% if @carted_product && @carted_product.errors.any?%>
-            <%@carted_producct.errors.full_messages.each do |message| %>
+            <%@carted_product.errors.full_messages.each do |message| %>
               <p><%= message %>.</p>
             <% end %>
           <% end %>

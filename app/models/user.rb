@@ -9,6 +9,20 @@ class User < ActiveRecord::Base
       return false
     end
   end
+  def buyer?
+    if role.name == "buyer"
+      return true
+    else
+      return false
+    end
+  end
+  def supplier?
+    if role.name == "supplier"
+      return true
+    else
+      return false
+    end
+  end
   def full_name
     "#{first_name} #{last_name}"
   end

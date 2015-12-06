@@ -2,76 +2,16 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: "users/sessions", unlocks: "users/unlocks", registrations: "users/registrations", passwords: "users/passwords", confirmations: "users/confirmations" }
   root to: 'products#index'
-  
-  get '/products', to: 'products#index'
 
-  get '/products/new', to: 'products#new'
+  resources :products
 
-  post '/products', to: 'products#create'
+  resources :suppliers
 
-  get '/products/:id', to: 'products#show', as: 'product'
+  resources :images
 
-  get '/products/:id/edit', to: 'products#edit', as: 'edit_product'
+  resources :orders
 
-  patch '/products/:id', to: 'products#update'
-
-  delete 'products/:id', to: 'products#destroy'
-
-  get '/suppliers', to: 'suppliers#index'
-
-  get '/suppliers/new', to: 'suppliers#new'
-
-  post '/suppliers', to: 'suppliers#create'
-
-  get '/suppliers/:id', to: 'suppliers#show', as: 'supplier'
-
-  get '/suppliers/:id/edit', to: 'suppliers#edit', as: 'edit_supplier'
-
-  patch '/suppliers/:id', to: 'suppliers#update'
-
-  delete 'suppliers/:id', to: 'suppliers#destroy'
-  
-  get '/images', to: 'images#index'
-
-  get '/images/new', to: 'images#new'
-
-  post '/images', to: 'images#create'
-
-  get '/images/:id', to: 'images#show', as: 'image'
-
-  get '/images/:id/edit', to: 'images#edit', as: 'edit_image'
-
-  patch '/images/:id', to: 'images#update'
-
-  delete 'images/:id', to: 'images#destroy'
-
-  get '/orders', to: 'orders#index'
-
-  get '/orders/new', to: 'orders#new'
-
-  post '/orders', to: 'orders#create'
-
-  get '/orders/:id', to: 'orders#show', as: 'order'
-
-  get '/orders/:id/edit', to: 'orders#edit', as: 'edit_order'
-
-  patch '/orders/:id', to: 'orders#update'
-
-  delete 'orders/:id', to: 'orders#destroy'
-
-  get '/carted_products', to: 'carted_products#index'
-
-  get '/carted_products/new', to: 'carted_products#new'
-
-  post '/carted_products', to: 'carted_products#create'
-
-  get '/carted_products/:id', to: 'carted_products#show', as: 'carted_product'
-
-  get '/carted_products/:id/edit', to: 'carted_products#edit', as: 'edit_carted_product'
-
-  patch '/carted_products/:id', to: 'carted_products#update'
-
-  delete 'carted_products/:id', to: 'carted_products#destroy'
+  resources :carted_products
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -12,6 +12,7 @@ class Product < ActiveRecord::Base
   validates :user, :supplier, :name, :description, :price, presence: true
   validates :price, length: {in: 4..5}
 
+  accepts_nested_attributes_for :images
 
   def self.discount
     1.00

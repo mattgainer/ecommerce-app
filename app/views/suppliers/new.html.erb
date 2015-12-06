@@ -1,28 +1,30 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <h3 class = "center-text">New Supplier Entry Form</h3>
-      <%= form_tag '/suppliers', method: :post do %>
-        <div class="form-group">
-          <%= label_tag :name, "Supplier Name" %>
-          <%= text_field_tag :name, "Supplier", class: "form-control" %>
-        </div>      
-        <div class="form-group">
-          <%= label_tag :email, "Supplier Email" %>
-          <%= text_field_tag :email, "example@example.org", class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag :phone, "Supplier Phone Number" %>
-          <%= text_field_tag :phone, "(XXX) XXX-XXXX", class: "form-control" %>
-        </div>
-        <div class="form-group center-text">
-          <%= submit_tag "Submit Supplier", class: "btn btn-default btn-lg" %>
-        </div>
-      <% end %>
-      <div class="form-group center-text">
-          <%= link_to "Abort Mission", "/suppliers", class: "btn btn-default btn-lg" %>
+<div class = "container-fluid">
+  <div class = "col-md-4"></div>
+  <div class = "col-md-4">
+    <%= form_for @supplier do |f| %>
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "form-control" %>
       </div>
-    </div>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :company_name %>
+        <%= f.text_field :company_name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :phone %>
+        <%= f.text_field :phone, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group center-text">
+        <%= f.submit "Add Supplier", class: "btn btn-default btn-lg center-text" %>
+      </div>
+    <% end %>
   </div>
 </div>

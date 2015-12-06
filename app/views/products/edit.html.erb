@@ -1,29 +1,33 @@
 <div class = "container-fluid">
   <div class = "col-md-4"></div>
   <div class = "col-md-4">
-    <%= form_tag "/products/#{@product.id}", method: :patch do %>
-      <div class = "form-group">
-        <p><%= label_tag :name %></p>
-        <p><%= text_field_tag :name, @product.name %></p>
+    <%= form_for @product do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
       </div>
-      <div class = "form-group">
-        <p><%= label_tag :price %></p>
-        <p><%= text_field_tag :price, @product.price%></p>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "form-control" %>
       </div>
-      <div class = "form-group">
-        <p><%= label_tag :description %></p>
-        <p><%= text_area_tag :description, @product.description %></p>
+      <div class="form-group">
+        <%= f.label :price %>
+        <%= f.text_field :price, class: "form-control" %>
       </div>
-      <% @product.images.each_with_index do |image, index| %>
-        <div class = "form-group">
-          <p><%= label_tag "Image #{index + 1}" %></p>
-          <p><%= link_to "#{image.url}", "/images/#{image.id}/edit" %></p>
-        </div>
-      <% end %>
-      <div class = "form-group">
-        <p><%= label_tag :instock %>? <%= check_box :instock, :in_stock, {class: "checkbox"}, checked_value = "true", unchecked_value = "false" %></p>
+      <div class="form-group">
+        <%= f.label :instock? %>
+        <%= f.check_box :instock %>
       </div>
-      <%= submit_tag "Submit Changes" %>
+      <div class="form-group">
+        <%= f.label :supplier_id %>
+        <%=f.collection_select :supplier_id, Supplier.all, :id, :company_name%>
+      </div>
+      <div class="form-group center-text">
+        <%= f.submit "Add Product", class: "btn btn-default btn-lg center-text" %>
+      </div>
     <% end %>
+    <div class="form-group center-text">
+      <%= link_to "Abort Mission", "/products", class: "btn btn-default btn-lg" %>
+    </div>
   </div>
 </div>

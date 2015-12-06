@@ -1,7 +1,11 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_admin!, only: [:create, :update, :destroy]
   def index
-    if !current_user.orders.find_by(open: true)
-      redirect_to "/orders"
+    if current_user
+      if !current_user.orders.find_by(open: true)
+        redirect_to "/orders"
+      end
     end
     if params[:order] == "PHtoL"
       @products = Product.all.order(price: :desc)
@@ -15,52 +19,50 @@ class ProductsController < ApplicationController
     if params[:discount] == "true"
       @products = @products.where("price < ?", Product.discount )
     elsif params[:commit] == "Search"
-      @products = @products.where(name: params[:search])
+      @products = @products.where("name LIKE ?", "%#{params[:search]}%")
     end
   end
   def create
-    if params[:instock][:in_stock] == "true"
-      @in_stock = true
-    else
-      @in_stock = false
-    end
-    supplier = Supplier.find_by(name: params[:supplier_name]) || Supplier.new
-      @product = Product.new(name: params[:name], price: params[:price], description: params[:description], instock: @in_stock, user_id: current_user.id, supplier_id: supplier.id)
+      @product = Product.new(product_params)
+      @product.attributes = {user_id: current_user.id}
     if @product.save
       redirect_to "/products/#{Product.last.id}"
       flash[:success] = "Product Created"
     else
       render :new
+      flash[:warning] = "Product Not Created"
     end
   end
   def new
-    unless current_user.admin?
-      redirect_to root_path
-    end
     @product = Product.new
+    @product.images.build
   end
   def show
-    @product = Product.find_by(id: params[:id].to_i)
+    @product = Product.find_by(id: params[:id])
   end
   def edit
-    unless current_user.admin?
-      redirect_to root_path
-    end
-    @product = Product.find_by(id: params[:id].to_i)
+    @product = Product.find_by(id: params[:id])
+    @product.images.build
   end
   def update
-    if params[:instock][:in_stock] == "true"
-      @in_stock = true
+    @product = Product.find_by(id: params[:id])
+    if @product.update(product_params)
+      flash[:info] = "Product Updated"
+      redirect_to "/products/#{Product.find_by(id: params[:id]).id}"
     else
-      @in_stock = false
+      flash[:warning] = "Product Not Updated"
+      render :edit
     end
-    Product.find_by(id: params[:id]).update(name: params[:name], price: params[:price], description: params[:description], instock: @in_stock)
-    flash[:info] = "Product Updated"
-    redirect_to "/products/#{Product.find_by(id: params[:id]).id}"
   end
   def destroy
     Product.find_by(id: params[:id]).destroy
     redirect_to "/products"
     flash[:warning] = "Product Deleted"
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:id, :name, :price, :description, :instock, :user_id, :supplier_id, images_attributes: [:url])
   end
 end

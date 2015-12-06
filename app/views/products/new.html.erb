@@ -1,47 +1,45 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <h3 class = "center-text">New Product Entry Form</h3>
-      <%= form_tag '/products', method: :post do %>
-        <div class="form-group center-text">
-          <% if @product && @product.errors.any?%>
-            <%@product.errors.full_messages.each do |message| %>
-            <p><%= message %>.</p>
-            <% end %>
-          <% end %>
-        </div>
+<div class = "container-fluid">
+  <div class = "col-md-4"></div>
+  <div class = "col-md-4">
+    <%= form_for @product do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :price %>
+        <%= f.text_field :price, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :instock? %>
+        <%= f.check_box :instock %>
+      </div>
+      <div class="form-group">
+        <%= f.label :supplier_id %>
+        <%= f.collection_select :supplier_id, Supplier.all, :id, :company_name%>
+      </div>
+      <%= f.fields_for :images do |ff| %>
         <div class="form-group">
-          <%= label_tag :name, "Product Name" %>
-          <%= text_field_tag :name, @product.name, class: "form-control" %>
-        </div>      
-        <div class="form-group">
-          <%= label_tag :price, "Product Price in dollars" %>
-          <%= text_field_tag :price, @product.price, class: "form-control" %>
+          <%= ff.label :url, "Image URL 2" %>
+          <%= ff.text_field :url, class: "form-control"%>
         </div>
+      <% end %>
+      <%= f.fields_for :images do |ff| %>
         <div class="form-group">
-          <%= label_tag :description, "Product Description" %>
-          <%= text_field_tag :description, @product.description, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag :supplier_name %>
-          <% if @product.supplier%>
-            <%= text_field_tag :supplier_name, @product.supplier.name, class: "form-control" %>
-          <% else %>
-            <%= text_field_tag :supplier_name, "", class: "form-control" %>
-          <% end %>
-        </div>
-        <div class="form-group">
-          <%= label_tag :instock, "In Stock?" %>
-          <%= check_box :instock, :in_stock, {class: "checkbox"}, checked_value = "true", unchecked_value = "false" %>
-        </div>
-        <div class="form-group center-text">
-          <%= submit_tag "Submit Product", class: "btn btn-default btn-lg" %>
+          <%= ff.label :url, "Image URL" %>
+          <%= ff.text_field :url, class: "form-control"%>
         </div>
       <% end %>
       <div class="form-group center-text">
-          <%= link_to "Abort Mission", "/products", class: "btn btn-default btn-lg" %>
+        <%= f.submit "Add Product", class: "btn btn-default btn-lg" %>
       </div>
+    <% end %>
+    <div class="form-group center-text">
+      <%= link_to "Abort Mission", "/products", class: "btn btn-default btn-lg" %>
     </div>
   </div>
 </div>

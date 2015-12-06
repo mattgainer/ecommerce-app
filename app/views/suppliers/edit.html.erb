@@ -1,20 +1,30 @@
 <div class = "container-fluid">
   <div class = "col-md-4"></div>
   <div class = "col-md-4">
-    <%= form_tag "/suppliers/#{@supplier.id}", method: :patch do %>
-      <div class = "form-group">
-        <p><%= label_tag :name %></p>
-        <p><%= text_field_tag :name, @supplier.name %></p>
+    <%= form_for @supplier do |f| %>
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "form-control" %>
       </div>
-      <div class = "form-group">
-        <p><%= label_tag :email %></p>
-        <p><%= text_field_tag :email, @supplier.email%></p>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control" %>
       </div>
-      <div class = "form-group">
-        <p><%= label_tag :phone %></p>
-        <p><%= text_area_tag :phone, @supplier.phone %></p>
+      <div class="form-group">
+        <%= f.label :company_name %>
+        <%= f.text_field :company_name, class: "form-control" %>
       </div>
-      <%= submit_tag "Submit Changes" %>
+      <div class="form-group">
+        <%= f.label :phone %>
+        <%= f.text_field :phone, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group center-text">
+        <%= f.submit "Edit Supplier", class: "btn btn-default btn-lg center-text" %>
+      </div>
     <% end %>
   </div>
 </div>
